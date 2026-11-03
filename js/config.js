@@ -40,5 +40,5 @@ window.WEDDING = {
 
   // Google Apps Script web app URL (ends in /exec). When set, wishes are saved
   // to the Google Sheet and shown on the page.
-  wishesEndpoint: ""
+  wishesEndpoint: "https://script.google.com/macros/s/AKfycbzS9hmDpqyN4CAZMr_w3TzjAAl-exuWppQdil0cNWixLViDv1SJjfuoLh3fQXEjH4OhZg/exec"
 };
