@@ -12,7 +12,7 @@ Live: https://amaljithtr.github.io/thomson-weds-amrutha/
 | Photos (JPG) | `assets/img/` |
 | Colours and fonts | top of `css/style.css` |
 
-After any change, re-share the link with `?v=2` (then `?v=3`, …) so phones load the new version.
+After changing CSS or JS, bump the `?v=` number on the `<link>` and `<script>` tags in `index.html` so browsers load the new files.
 
 ## Background music (optional)
 Upload an MP3 you have rights to as `assets/audio/theme.mp3`, then set `music: "assets/audio/theme.mp3"` in `js/config.js`.
