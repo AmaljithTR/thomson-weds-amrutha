@@ -85,7 +85,7 @@
     return "https://calendar.google.com/calendar/render?action=TEMPLATE" +
       "&text=" + encodeURIComponent(ev.title) +
       "&dates=" + ev.start + "/" + ev.end +
-      "&location=" + encodeURIComponent(W.venue.name + ", " + W.venue.address) +
+      "&location=" + encodeURIComponent(ev.location || (W.venue.name + ", " + W.venue.address)) +
       "&details=" + encodeURIComponent(ev.details) +
       "&ctz=Asia/Kolkata";
   }

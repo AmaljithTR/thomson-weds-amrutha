@@ -12,6 +12,13 @@ window.WEDDING = {
 
   // Calendar times in UTC (IST minus 5h30)
   events: {
+    betrothal: {
+      title: "Betrothal · Thomson & Amrutha",
+      start: "20261107T053000Z", // 11:00 AM IST
+      end:   "20261107T073000Z", // 1:00 PM IST (includes lunch)
+      location: "St. Antony’s Church, Panangad, Ernakulam",
+      details: "Betrothal ceremony at 11:00 AM, St. Antony’s Church, Panangad. Lunch at 12:00 PM, MPS Church Hall, Chathamma."
+    },
     matrimony: {
       title: "Holy Matrimony · Thomson & Amrutha",
       start: "20261122T093000Z", // 3:00 PM IST
