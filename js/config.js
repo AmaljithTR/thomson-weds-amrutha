@@ -38,6 +38,10 @@ window.WEDDING = {
   // Optional: "assets/audio/theme.mp3" (a track you have rights to). Empty hides the music button.
   music: "",
 
+  // Background music from YouTube (used when "music" above is empty).
+  // The ID is the part after "watch?v=" in the link. Leave empty for no music.
+  youtubeId: "_TNwN92mw6E",
+
   // Optional: Google Apps Script web app URL (see apps-script/Code.gs).
   // While empty, the wishes form sends each wish to Anson on WhatsApp.
   wishesEndpoint: ""

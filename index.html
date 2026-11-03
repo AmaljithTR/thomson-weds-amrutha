@@ -28,11 +28,25 @@
 
 <!-- ===== Opening card ===== -->
 <div class="opener" id="opener" role="dialog" aria-label="Wedding invitation">
-  <button class="opener__card" id="open-btn" type="button" aria-label="Open the invitation">
-    <span class="seal">T<i>&amp;</i>A</span>
-    <span class="opener__rule"></span>
-    <span class="opener__names">Thomson <em>·</em> Amrutha</span>
-    <span class="opener__sub">Wedding Invitation · 22 November 2026</span>
+  <p class="opener__eyebrow">You are invited</p>
+  <button class="envelope" id="open-btn" type="button" aria-label="Open the invitation">
+    <span class="env__back"></span>
+    <span class="env__letter">
+      <span class="env__letter-inner">
+        <span class="cross cross--sm" aria-hidden="true"></span>
+        <span class="env__letter-lead">Together with their families</span>
+        <span class="env__letter-names">Thomson<i>weds</i>Amrutha</span>
+        <span class="env__letter-date">22 · 11 · 2026</span>
+      </span>
+    </span>
+    <span class="env__front">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,0 50,52 100,0" /></svg>
+      <span class="env__to">Thomson <em>&amp;</em> Amrutha</span>
+    </span>
+    <span class="env__flap">
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,0 50,56 100,0" /></svg>
+    </span>
+    <span class="seal env__seal">T<i>&amp;</i>A</span>
   </button>
   <p class="opener__tap">Tap to open</p>
 </div>
@@ -259,6 +273,7 @@
   <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5z"/></svg>
 </button>
 <audio id="audio" loop preload="none"></audio>
+<div class="yt-holder" aria-hidden="true"><div id="yt-player"></div></div>
 
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
