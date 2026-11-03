@@ -19,7 +19,7 @@
   nameEl.addEventListener("input", function () { storeSet("wish:name", nameEl.value); });
   msgEl.addEventListener("input", function () { storeSet("wish:draft", msgEl.value); });
 
-  if (!endpoint) btn.textContent = "Send blessing on WhatsApp";
+  if (!endpoint) btn.textContent = "Send Wishes via WhatsApp";
 
   function formatDate(t) {
     var d = new Date(t);
@@ -70,11 +70,11 @@
       wishes.forEach(function (w) { list.appendChild(renderWish(w)); });
       if (wishes.length) {
         count.hidden = false;
-        count.textContent = wishes.length === 1 ? "1 blessing so far" : wishes.length + " blessings so far";
+        count.textContent = wishes.length === 1 ? "✦ 1 blessing received" : "✦ " + wishes.length + " blessings received";
       }
     }).catch(function () {
       count.hidden = false;
-      count.textContent = "Blessings couldn’t load. Check your connection and refresh the page.";
+      count.textContent = "Wishes couldn’t load. Check your connection and refresh the page.";
     });
   }
 
@@ -82,15 +82,15 @@
     e.preventDefault();
     var name = nameEl.value.trim(), message = msgEl.value.trim();
     if (!name || !message) {
-      status.textContent = !name ? "Add your name to send a blessing." : "Write a few words before sending.";
+      status.textContent = !name ? "Add your name to send your wishes." : "Write a few words before sending.";
       (!name ? nameEl : msgEl).focus();
       return;
     }
 
     if (!endpoint) {
-      var text = "Blessing for Amrutha & Thomson from " + name + ":\n\n" + message;
+      var text = "Wishes for Thomson & Amrutha from " + name + ":\n\n" + message;
       window.open("https://wa.me/" + W.contact.whatsapp + "?text=" + encodeURIComponent(text), "_blank", "noopener");
-      status.textContent = "WhatsApp opened with your blessing. Tap send there.";
+      status.textContent = "WhatsApp opened with your wishes. Tap send there to deliver them.";
       return;
     }
 
@@ -98,10 +98,10 @@
     post({ name: name, message: message }).then(function (res) {
       if (!res || !res.ok) throw new Error();
       msgEl.value = ""; storeSet("wish:draft", "");
-      status.textContent = "Blessing sent. Thank you!";
+      status.textContent = "Thank you! Your wishes have been sent.";
       load();
     }).catch(function () {
-      status.textContent = "Your blessing didn’t send. Check your connection and try again.";
+      status.textContent = "Your wishes didn’t send. Check your connection and try again.";
     }).then(function () { btn.disabled = false; });
   });
 
