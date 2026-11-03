@@ -35,7 +35,10 @@ window.WEDDING = {
   // The ID is the part after "watch?v=" in the link. Leave empty for no music.
   youtubeId: "_TNwN92mw6E",
 
-  // Optional: Google Apps Script web app URL (see apps-script/Code.gs).
-  // While empty, the wishes form sends each wish to Anson KJ on WhatsApp.
+  // Wishes go to Thomson (groom) on WhatsApp while wishesEndpoint below is empty.
+  wishesWhatsapp: "919020506140",
+
+  // Google Apps Script web app URL (ends in /exec). When set, wishes are saved
+  // to the Google Sheet and shown on the page.
   wishesEndpoint: ""
 };

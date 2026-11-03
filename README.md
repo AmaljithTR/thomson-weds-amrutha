@@ -17,10 +17,9 @@ After changing CSS or JS, bump the `?v=` number on the `<link>` and `<script>` t
 ## Background music (optional)
 Upload an MP3 you have rights to as `assets/audio/theme.mp3`, then set `music: "assets/audio/theme.mp3"` in `js/config.js`.
 
-## Wishes wall (optional)
-By default, “Send Wishes” opens WhatsApp addressed to Anson KJ. To show wishes on the page:
-1. Create a Google Sheet, rename the tab `Wishes`, headers in row 1: `id | name | message | likes | time | approved`.
-2. Extensions → Apps Script → paste `apps-script/Code.gs` → save.
-3. Deploy → New deployment → Web app → Execute as *Me*, access *Anyone*.
-4. Paste the URL into `wishesEndpoint` in `js/config.js`.
-5. To hide a wish, type `FALSE` in its `approved` cell.
+## Wishes wall
+Wishes are saved in the Google Sheet and shown on the page once `wishesEndpoint` in `js/config.js` holds the Apps Script web app URL. Until then, “Send Wishes” opens WhatsApp to Thomson.
+
+Setup: in the Google Sheet open **Extensions → Apps Script**, paste `apps-script/Code.gs`, save, then **Deploy → New deployment → Web app** (Execute as *Me*, access *Anyone*). Copy the `/exec` URL into `wishesEndpoint`.
+
+To hide a wish, type `FALSE` in its `approved` cell in the sheet.

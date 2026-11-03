@@ -68,8 +68,9 @@
       var wishes = (data && data.wishes) || [];
       list.textContent = "";
       wishes.forEach(function (w) { list.appendChild(renderWish(w)); });
+      count.hidden = false;
+      if (!wishes.length) count.textContent = "Be the first to send your wishes";
       if (wishes.length) {
-        count.hidden = false;
         count.textContent = wishes.length === 1 ? "✦ 1 blessing received" : "✦ " + wishes.length + " blessings received";
       }
     }).catch(function () {
@@ -89,7 +90,7 @@
 
     if (!endpoint) {
       var text = "Wishes for Thomson & Amrutha from " + name + ":\n\n" + message;
-      window.open("https://wa.me/" + W.contact.whatsapp + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+      window.open("https://wa.me/" + (W.wishesWhatsapp || W.contact.whatsapp) + "?text=" + encodeURIComponent(text), "_blank", "noopener");
       status.textContent = "WhatsApp opened with your wishes. Tap send there to deliver them.";
       return;
     }

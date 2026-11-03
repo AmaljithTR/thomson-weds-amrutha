@@ -1,51 +1,60 @@
 /**
- * Wishes wall backend for the wedding invitation.
- * 1. Create a Google Sheet. Rename the first tab to: Wishes
- * 2. Put these headers in row 1: id | name | message | likes | time | approved
- * 3. Extensions > Apps Script, paste this file, save.
- * 4. Deploy > New deployment > Web app. Execute as: Me. Who has access: Anyone.
- * 5. Copy the web app URL into js/config.js as wishesEndpoint.
- * To hide a wish, type FALSE in its "approved" cell.
+ * Wishes wall for Thomson & Amrutha's invitation.
+ * Paste into Extensions > Apps Script of the Google Sheet, then
+ * Deploy > New deployment > Web app (Execute as: Me, Who has access: Anyone).
+ * The "Wishes" tab and its headers are created automatically.
+ * To hide a wish from the website, type FALSE in its "approved" cell.
  */
-const SHEET = SpreadsheetApp.getActive().getSheetByName('Wishes');
+const HEADERS = ['id', 'name', 'message', 'likes', 'time', 'approved'];
+
+function sheet_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sh = ss.getSheetByName('Wishes');
+  if (!sh) sh = ss.insertSheet('Wishes');
+  if (sh.getLastRow() === 0) sh.appendRow(HEADERS);
+  return sh;
+}
 
 function doGet() {
-  const rows = SHEET.getDataRange().getValues().slice(1)
+  const rows = sheet_().getDataRange().getValues().slice(1)
     .filter(r => r[0] && String(r[5]).toUpperCase() !== 'FALSE')
-    .map(r => ({ id: r[0], name: r[1], message: r[2], likes: Number(r[3]) || 0, time: r[4] }))
+    .map(r => ({ id: String(r[0]), name: String(r[1]), message: String(r[2]),
+                 likes: Number(r[3]) || 0, time: r[4] }))
     .reverse();
-  return json({ wishes: rows });
+  return json_({ wishes: rows });
 }
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
-    const body = JSON.parse(e.postData.contents || '{}');
+    const sh = sheet_();
+    const body = JSON.parse((e.postData && e.postData.contents) || '{}');
 
     if (body.action === 'like') {
-      const data = SHEET.getDataRange().getValues();
-      for (let i = 1; i < data.length; i++) {
-        if (data[i][0] === body.id) {
-          SHEET.getRange(i + 1, 4).setValue((Number(data[i][3]) || 0) + 1);
+      const ids = sh.getRange(2, 1, Math.max(sh.getLastRow() - 1, 1), 1).getValues();
+      for (let i = 0; i < ids.length; i++) {
+        if (String(ids[i][0]) === String(body.id)) {
+          const cell = sh.getRange(i + 2, 4);
+          cell.setValue((Number(cell.getValue()) || 0) + 1);
           break;
         }
       }
-      return json({ ok: true });
+      return json_({ ok: true });
     }
 
     const name = String(body.name || '').slice(0, 60).trim();
     const message = String(body.message || '').slice(0, 300).trim();
-    if (!name || !message) return json({ ok: false });
-    // Prefix with ' so Sheets never treats guest text as a formula
-    SHEET.appendRow([Utilities.getUuid(), "'" + name, "'" + message, 0, new Date(), true]);
-    return json({ ok: true });
+    if (!name || !message) return json_({ ok: false });
+    // The leading ' stops Sheets from treating guest text as a formula
+    sh.appendRow([Utilities.getUuid(), "'" + name, "'" + message, 0, new Date(), true]);
+    return json_({ ok: true });
   } finally {
     lock.releaseLock();
   }
 }
 
-function json(obj) {
+function json_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj))
     .setMimeType(ContentService.MimeType.JSON);
 }
