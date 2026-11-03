@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AmruthaThomson//Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:matrimony-20261122@amrutha-thomson
+DTSTAMP:20261103T000000Z
+DTSTART:20261122T093000Z
+DTEND:20261122T113000Z
+SUMMARY:Holy Matrimony of Amrutha & Thomson
+LOCATION:St George's Roman Catholic Church\, Church Landing Rd\, Pallimukku\, Ernakulam\, Kerala 682016
+DESCRIPTION:Holy Matrimony at 3:00 PM\, followed by the reception at 6:00 PM.
+URL:https://maps.app.goo.gl/jL1tBFrxqbYLyV9b7
+BEGIN:VALARM
+TRIGGER:-PT3H
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AmruthaThomson//Wedding//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:reception-20261122@amrutha-thomson
+DTSTAMP:20261103T000000Z
+DTSTART:20261122T123000Z
+DTEND:20261122T153000Z
+SUMMARY:Wedding Reception of Amrutha & Thomson
+LOCATION:St George's Roman Catholic Church\, Church Landing Rd\, Pallimukku\, Ernakulam\, Kerala 682016
+DESCRIPTION:Wedding reception\, 6:00 PM to 9:00 PM.
+URL:https://maps.app.goo.gl/jL1tBFrxqbYLyV9b7
+BEGIN:VALARM
+TRIGGER:-PT3H
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR
