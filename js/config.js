@@ -12,13 +12,6 @@ window.WEDDING = {
 
   // Calendar times in UTC (IST minus 5h30)
   events: {
-    betrothal: {
-      title: "Betrothal · Thomson & Amrutha",
-      start: "20261107T053000Z", // 11:00 AM IST
-      end:   "20261107T073000Z", // 1:00 PM IST (includes lunch)
-      location: "St. Antony’s Church, Panangad, Ernakulam",
-      details: "Betrothal ceremony at 11:00 AM, St. Antony’s Church, Panangad. Lunch at 12:00 PM, MPS Church Hall, Chathamma."
-    },
     matrimony: {
       title: "Holy Matrimony · Thomson & Amrutha",
       start: "20261122T093000Z", // 3:00 PM IST
@@ -33,7 +26,7 @@ window.WEDDING = {
     }
   },
 
-  contact: { name: "Anson", phone: "+918714232361", whatsapp: "918714232361" },
+  contact: { name: "Anson KJ", phone: "+918714232361", whatsapp: "918714232361" },
 
   // Optional: "assets/audio/theme.mp3" (a track you have rights to). Empty hides the music button.
   music: "",
@@ -43,6 +36,6 @@ window.WEDDING = {
   youtubeId: "_TNwN92mw6E",
 
   // Optional: Google Apps Script web app URL (see apps-script/Code.gs).
-  // While empty, the wishes form sends each wish to Anson on WhatsApp.
+  // While empty, the wishes form sends each wish to Anson KJ on WhatsApp.
   wishesEndpoint: ""
 };

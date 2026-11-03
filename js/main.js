@@ -89,8 +89,8 @@
     setTimeout(function () {
       opener.classList.add("is-hidden");
       body.classList.remove("is-locked");
-    }, reduce ? 300 : 2600);
-    setTimeout(function () { opener.remove(); }, reduce ? 1200 : 3500);
+    }, reduce ? 300 : 2400);
+    setTimeout(function () { opener.remove(); }, reduce ? 1400 : 3500);
   }
   opener.addEventListener("click", openInvite);
 
@@ -134,7 +134,7 @@
   if (W.venue && W.venue.mapUrl) {
     document.querySelectorAll("[data-map]").forEach(function (a) { a.href = W.venue.mapUrl; });
   }
-  var waText = encodeURIComponent("Hi Anson, I have a query regarding Thomson & Amrutha’s wedding.");
+  var waText = encodeURIComponent("Hi Anson KJ, I have a query regarding Thomson & Amrutha’s wedding.");
   ["wa-link", "fab-wa"].forEach(function (id) {
     var a = document.getElementById(id);
     if (a && W.contact) a.href = "https://wa.me/" + W.contact.whatsapp + "?text=" + waText;

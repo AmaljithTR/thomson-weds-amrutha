@@ -18,7 +18,7 @@ After changing CSS or JS, bump the `?v=` number on the `<link>` and `<script>` t
 Upload an MP3 you have rights to as `assets/audio/theme.mp3`, then set `music: "assets/audio/theme.mp3"` in `js/config.js`.
 
 ## Wishes wall (optional)
-By default, “Send Wishes” opens WhatsApp addressed to Anson. To show wishes on the page:
+By default, “Send Wishes” opens WhatsApp addressed to Anson KJ. To show wishes on the page:
 1. Create a Google Sheet, rename the tab `Wishes`, headers in row 1: `id | name | message | likes | time | approved`.
 2. Extensions → Apps Script → paste `apps-script/Code.gs` → save.
 3. Deploy → New deployment → Web app → Execute as *Me*, access *Anyone*.

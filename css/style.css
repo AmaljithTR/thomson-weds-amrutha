@@ -93,7 +93,7 @@ a { color: inherit; text-decoration: none; }
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.6rem;
   padding: 1.5rem;
   background: radial-gradient(ellipse at 50% 40%, var(--maroon-600), var(--maroon-900) 75%);
-  transition: opacity .8s ease, visibility 0s linear .8s;
+  transition: opacity 1s cubic-bezier(.4,0,.2,1), visibility 0s linear 1s;
 }
 .opener.is-hidden { opacity: 0; visibility: hidden; }
 .seal {
@@ -115,16 +115,22 @@ a { color: inherit; text-decoration: none; }
 @keyframes blink { 50% { opacity: .45; } }
 
 /* ----- Envelope ----- */
-.opener__eyebrow { font: italic 400 20px/1.3 var(--serif); color: var(--gold-light); }
+/* Timeline: seal 0–0.5s · flap 0.3–1.2s · letter 1.0–2.2s · fade-out from 2.3s */
+.opener__eyebrow { font: italic 400 20px/1.3 var(--serif); color: var(--gold-light); transition: opacity .5s ease; }
 .envelope {
   position: relative; display: block;
   width: min(86vw, 380px); aspect-ratio: 1.5 / 1;
-  margin-top: 120px;            /* room for the letter to rise */
+  margin-top: 120px;
   padding: 0; border: 0; background: none; cursor: pointer;
-  perspective: 900px; color: inherit; font: inherit;
-  filter: drop-shadow(0 26px 40px rgba(0,0,0,.5));
+  perspective: 1100px; color: inherit; font: inherit;
+  transition: transform .9s cubic-bezier(.22,1,.36,1);
 }
-.env__back, .env__front, .env__flap, .env__letter { position: absolute; display: block; }
+/* Soft shadow as its own layer (cheaper than a filter, so the animation stays smooth) */
+.envelope::before {
+  content: ""; position: absolute; left: 6%; right: 6%; bottom: -18px; height: 30px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,.55), transparent 70%);
+}
+.env__back, .env__front, .env__flap, .env__letter { position: absolute; display: block; backface-visibility: hidden; }
 .env__back { inset: 0; background: var(--maroon-700); border: 1px solid var(--gold-dark); }
 .env__letter {
   left: 6%; right: 6%; top: 5%; height: 92%;
@@ -132,7 +138,9 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--gold);
   box-shadow: inset 0 0 0 5px #FBF4E4, inset 0 0 0 6px rgba(156,122,60,.55);
   z-index: 2;
-  transition: transform 1s cubic-bezier(.3,.7,.2,1) .95s;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  transition: transform 1.2s cubic-bezier(.22,1,.36,1) 1s;
 }
 .env__letter-inner {
   height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 6px;
@@ -150,7 +158,7 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--gold-dark);
 }
 .env__front svg, .env__flap svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.env__front polyline, .env__flap polyline { fill: none; stroke: var(--gold); stroke-width: 1; vector-effect: non-scaling-stroke; opacity: .75; }
+.env__front polyline, .env__flap polyline { opacity: .75; }
 .env__to {
   position: absolute; left: 0; right: 0; bottom: 13%;
   font: 400 10.5px/1 var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--gold-light);
@@ -161,18 +169,24 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(180deg, var(--maroon-500), #6A1D25);
   clip-path: polygon(0 0, 100% 0, 50% 56%);
   transform-origin: 50% 0;
-  transition: transform .75s cubic-bezier(.5,0,.3,1) .35s, z-index 0s linear .72s;
+  transform: rotateX(0deg);
+  backface-visibility: visible;
+  will-change: transform;
+  /* z-index drops when the flap passes vertical, halfway through the turn */
+  transition: transform .9s cubic-bezier(.65,0,.35,1) .3s, z-index 0s linear .75s;
 }
 .env__seal {
   position: absolute; left: 50%; top: 56%; z-index: 5;
   transform: translate(-50%, -50%);
   width: 66px; height: 66px; font-size: 20px;
-  transition: transform .45s ease, opacity .45s ease;
+  will-change: transform, opacity;
+  transition: transform .5s cubic-bezier(.22,1,.36,1), opacity .4s ease .1s;
 }
-.opener.is-open .env__seal { transform: translate(-50%, -50%) scale(1.25); opacity: 0; animation: none; }
+.opener.is-open .env__seal { transform: translate(-50%, -50%) scale(1.35); opacity: 0; animation: none; }
 .opener.is-open .env__flap { transform: rotateX(180deg); z-index: 1; }
-.opener.is-open .env__letter { transform: translateY(-58%); }
+.opener.is-open .env__letter { transform: translate3d(0, -58%, 0); }
 .opener.is-open .opener__tap, .opener.is-open .opener__eyebrow { opacity: 0; animation: none; transition: opacity .4s; }
+.opener.is-hidden .envelope { transform: translate3d(0, 24px, 0) scale(.97); }
 
 /* ===== Top bar ===== */
 .topbar {
